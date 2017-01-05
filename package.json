@@ -1,0 +1,46 @@
+{
+  "title": "Tus.io",
+  "name": "tus-io",
+  "version": "0.0.1",
+  "scripts": {
+    "inject:community": "_scripts/inject-community.sh",
+    "inject:protocol": "_scripts/inject-protocol.sh",
+    "inject": "npm-run-all --parallel inject:*",
+    "deploy": "lanyon deploy",
+    "slackin:deploy": "source env.sh && _scripts/slackin.sh",
+    "download:logos": "cross-env DEBUG=*:* IMAGES_CFG=_data/logos.yml IMAGES_DIR=assets/img/logos coffee ./_scripts/download-external-images.coffee",
+    "download:press": "cross-env DEBUG=*:* IMAGES_CFG=_data/press.yml IMAGES_DIR=assets/img/press coffee ./_scripts/download-external-images.coffee",
+    "install": "bower install && lanyon postinstall",
+    "optimize:logos": "cross-env IMAGES_CFG=_data/logos.yml IMAGES_DIR=assets/img/logos _scripts/images-optimize.sh",
+    "optimize:press": "cross-env IMAGES_CFG=_data/press.yml IMAGES_DIR=assets/img/press _scripts/images-optimize.sh",
+    "pull": "git pull",
+    "build:assets:production": "LANYON_ENV=production lanyon build:assets",
+    "build:production": "LANYON_ENV=production lanyon build",
+    "build": "lanyon build",
+    "serve:production": "LANYON_ENV=production lanyon serve",
+    "serve": "lanyon serve",
+    "encrypt": "lanyon encrypt",
+    "start:production": "npm run build:production && npm run serve:production",
+    "start": "lanyon start"
+  },
+  "lanyon": {
+    "prebuild:production": "npm run inject"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "1.8.0",
+    "cross-env": "2.0.0",
+    "depurar": "0.2.2",
+    "download": "5.0.2",
+    "fakefile": "0.0.8",
+    "glob": "7.0.5",
+    "js-yaml": "3.6.1",
+    "lanyon": "0.0.47",
+    "npm-run-all": "2.3.0",
+    "on-the-githubs": "2.4.0",
+    "postcss": "5.1.0",
+    "postcss-reporter": "1.4.1",
+    "stylelint": "7.0.3",
+    "tus-js-client": "1.4.1"
+  }
+}
